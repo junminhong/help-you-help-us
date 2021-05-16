@@ -1,17 +1,17 @@
 <div class="container" style="text-align: left; padding-top: 20px;">
     <form>
         <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">請填寫您的真實姓名</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <label for="real-name" class="form-label">請填寫您的真實姓名</label>
+            <input type="text" class="form-control" id="real-name-input" placeholder="ex: 王小明" maxlength="25" required/>
         </div>
         <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">請填寫您的聯絡電話</label>
-            <input type="password" class="form-control" id="exampleInputPassword1">
+            <label for="phone-number" class="form-label">請填寫您的聯絡電話</label>
+            <input type="tel" class="form-control" id="phone-number-input" placeholder="ex: 0912345678" oninput="value=value.replace(/[^\d]/g,'')" maxlength="10" required/>
         </div>
         <div class="mb-3">
-            <label for="customRange3" class="form-label">請填寫一同進入的人數(包含自己)</label>
+            <label for="person-amount" class="form-label">請填寫一同進入的人數(包含自己)</label>
             <input type="range" class="form-range" min="1" max="10" step="1" id="customRange3" v-model.number="personAmount">
-            <input type="text"  class="form-control" style="width: 100%" v-model.number="personAmount" />
+            <input type="number" class="form-control" style="width: 100%" v-model.number="personAmount" max="10" min="1" required/>
         </div>
         <button type="submit" style="width: 100%;" class="btn btn-primary">送出</button>        
         <div id="emailHelp" class="form-text">請麻煩一定要確實填寫正確資訊，感謝您的配合！</div>
