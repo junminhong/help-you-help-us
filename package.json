@@ -15,7 +15,11 @@
     "sweetalert2": "^11.0.7",
     "uid": "^2.0.0",
     "vue": "^3.0.0",
+    "vue-qrcode-reader": "^2.3.16",
     "vue-router": "^4.0.0-0",
+    "vue-translator": "^0.10.0",
+    "vue3-qr-reader": "0.0.3",
+    "vue3-qrcode": "0.0.2",
     "vuefire": "^2.2.5"
   },
   "devDependencies": {

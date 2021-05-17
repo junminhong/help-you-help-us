@@ -1,0 +1,13 @@
+<div class="flex-grow: 1;" style="height: 900px;">
+    <div class="container" style="padding-top: 20px;">
+        <div class="alert alert-success" role="alert">
+            <h1 class="alert-heading" style="text-align: center;">店家資訊已建立成功！</h1>
+            <hr>
+            <h2 class="alert-heading" style="text-align: center;">請將下方QRCode下載並列印即可。</h2>
+        </div>
+    </div>
+    <div class="container" style="padding-top: 20px; text-align: center;">
+        <VueQrcode style="text-align: center" id="qrcode" scale="10" value="shopQrcode"></VueQrcode>
+        <button type="button" style="width: 100%;" class="btn btn-primary" @click="downloadQrcode">下載</button>        
+    </div>
+</div>

@@ -3,6 +3,7 @@ import CustomerForm from '@/components/CustomerForm/CustomerForm'
 import PhoneVerification from '@/components/PhoneVerification/PhoneVerification'
 import VerificationSuccess from '@/components/VerificationSuccess/VerificationSuccess'
 import ShopForm from '@/components/ShopForm/ShopForm'
+import ShopQrCode from '@/components/ShopQrCode/ShopQrCode'
 
 const routes = [
   {
@@ -24,6 +25,11 @@ const routes = [
     path: '/shop-form',
     name: ShopForm,
     component: ShopForm
+  },
+  {
+    path: '/shop-qrcode',
+    name: ShopQrCode,
+    component: ShopQrCode
   }
 ]
 

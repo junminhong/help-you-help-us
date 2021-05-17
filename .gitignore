@@ -24,3 +24,5 @@ pnpm-debug.log*
 
 .firebase*
 firebase.json
+
+yarn.lock
