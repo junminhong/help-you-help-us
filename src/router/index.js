@@ -12,7 +12,7 @@ const routes = [
   },
   {
     path: '/phone-verification',
-    name: PhoneVerification,
+    name: 'PhoneVerification',
     component: PhoneVerification
   },
   {

@@ -10,25 +10,30 @@
     <form>
         <div class="mb-3">
             <label for="real-shop-name" class="form-label">請填寫完整的商店名稱*</label>
-            <input type="text" class="form-control" id="real-shop-name-input" placeholder="ex: 再來小吃" maxlength="25" required/>
+            <input type="text" class="form-control" id="real-shop-name-input" v-model="realShopName" placeholder="ex: 再來小吃" maxlength="25" required/>
+            <div style="color: red"><small>{{realShopNameErrorMsg}}</small></div>
         </div>
         <div class="mb-3">
             <label for="shop-address" class="form-label">請填寫完整的商店地址*</label>
-            <input type="text" class="form-control" id="shop-address-input" placeholder="ex: xx市" maxlength="40" required/>
+            <input type="text" class="form-control" id="shop-address-input" v-model="shopAddress" placeholder="ex: xx市" maxlength="40" required/>
+            <div style="color: red"><small>{{shopAddressErrorMsg}}</small></div>
         </div>
         <div class="mb-3">
             <label for="shop-phone-number" class="form-label">請填寫商店的市話/手機*</label>
-            <input type="tel" class="form-control" id="shop-phone-number-input" placeholder="ex: 06xxxxx" oninput="value=value.replace(/[^\d]/g,'')" maxlength="10" required/>
+            <input type="tel" class="form-control" id="shop-phone-number-input" v-model="shopPhoneNumber" placeholder="ex: 06xxxxx" oninput="value=value.replace(/[^\d]/g,'')" maxlength="10" required/>
+            <div style="color: red"><small>{{shopPhoneNumberErrorMsg}}</small></div>
         </div>
         <div class="mb-3">
-            <label for="real-name" class="form-label">請填寫負責人的真實姓名*</label>
-            <input type="text" class="form-control" id="real-name-input" placeholder="ex: 王小明" maxlength="25" required/>
+            <label for="real-owner-name" class="form-label">請填寫負責人的真實姓名*</label>
+            <input type="text" class="form-control" id="real-owner-name-input" v-model="realOwnerName" placeholder="ex: 王小明" maxlength="25" required/>
+            <div style="color: red"><small>{{realOwnerNameErrorMsg}}</small></div>
         </div>
         <div class="mb-3">
-            <label for="phone-number" class="form-label">請填寫負責人的聯絡電話*</label>
-            <input type="tel" class="form-control" id="phone-number-input" placeholder="ex: 0912345678" oninput="value=value.replace(/[^\d]/g,'')" maxlength="10" required/>
+            <label for="owner-phone-number" class="form-label">請填寫負責人的聯絡電話*</label>
+            <input type="tel" class="form-control" id="owner-phone-number-input" v-model="ownerPhoneNumber" placeholder="ex: 0912345678" oninput="value=value.replace(/[^\d]/g,'')" maxlength="10" required/>
+            <div style="color: red"><small>{{ownerPhoneNumberErrorMsg}}</small></div>
         </div>
-        <button type="submit" style="width: 100%;" class="btn btn-primary">送出</button>        
+        <button type="button" id="send_sms" style="width: 100%;" class="btn btn-primary" @click="checkShopInfo">送出</button>
         <div id="help" class="form-text">請麻煩一定要確實填寫正確資訊，感謝您的配合！</div>
     </form>
 </div>

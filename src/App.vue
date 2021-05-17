@@ -13,6 +13,14 @@ export default {
   components:{
     Header,
     Footer
-  }
+  },
+  prop: {
+    confirmationResult: ''
+  },
+  data(){
+    return{
+      
+    }
+  },
 }
 </script>
