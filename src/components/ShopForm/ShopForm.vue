@@ -67,21 +67,12 @@ export default{
             var email = this.ownerPhoneNumber + '@help-you-help-us.com.tw';
             var name = this.realOwnerName + this.realOwnerName;
             db.auth().signInWithEmailAndPassword(email, name).then(user => {user.user.phoneNumber
-                if (this. haveVerificationPhone){
-                    if (user.user.phoneNumber === undefined){
-                        this.gotoPhoneVerification();
-                    }
-                }else{
-                    this.createShopInfo(user.user.uid);
-                    console.log('註冊完成，等待生成qrcode');
-                }
+                this.createShopInfo(user.user.uid, user.user.phoneNumber);
+                console.log('註冊完成，等待生成qrcode');
             }).catch(error => {
                 if (error.code === 'auth/user-not-found'){
                     db.auth().createUserWithEmailAndPassword(email, name).then(user => {
-                        this.createShopInfo(user.user.uid);
-                        if (this. haveVerificationPhone){
-                            this.gotoPhoneVerification();
-                        }
+                        this.createShopInfo(user.user.uid, user.user.phoneNumber);
                     })
                 }
             })
@@ -101,24 +92,48 @@ export default{
             this.ownerPhoneNumber = '';
             this.shopAddress = '';
         },
-        gotoPhoneVerification: function(){
+        gotoPhoneVerification: function(shopUid){
             this.$router.push({
                 name: 'PhoneVerification',
-                params:{phonenumber: this.ownerPhoneNumber,}
+                params:{phonenumber: this.ownerPhoneNumber, shopUid: shopUid}
             }) 
         },
-        createShopInfo: function(userUid){
+        gotoQrcode: function(shopUid){
+            this.$router.push({
+                name: 'ShopQrCode',
+                params:{shopUid: shopUid,}
+            }) 
+        },
+        createShopInfo: function(userUid, phoneNumber){
             let date = dateFormat(db.firestore.Timestamp.seconds, "yyyy-mm-dd HH:mm:ss")
-            db.firestore().collection('users').doc(userUid).collection('shops').doc(uid(64)).set({
-                name: this.realShopName,
-                phone: this.shopPhoneNumber,
-                address: this.shopAddress,
-                owner_name: this.realOwnerName,
-                owner_phone: this.ownerPhoneNumber,
+            let shopUid = uid(64);
+            db.firestore().collection('users').doc(userUid).set({
+                name: this.realOwnerName,
+                phone: this.ownerPhoneNumber,
                 create_time: date,
                 update_time: date,
             }).then(()=>{
-                this.clearFormInput();
+                console.log('新增user');
+                db.firestore().collection('shops').doc(shopUid).set({
+                    name: this.realShopName,
+                    phone: this.shopPhoneNumber,
+                    address: this.shopAddress,
+                    user_uid: userUid,
+                    create_time: date,
+                    update_time: date,
+                }).then(()=>{
+                    this.clearFormInput();
+                    if (this.haveVerificationPhone){
+                        if (phoneNumber === undefined){
+                            this.gotoPhoneVerification(shopUid);
+                        }else{
+                            this.gotoQrcode(shopUid);
+                        }
+                    }else{
+                        // 如果不用驗證
+                        this.gotoQrcode(shopUid);
+                    }
+                })
             })
         },
         aas: function(){

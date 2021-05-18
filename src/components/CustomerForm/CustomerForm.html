@@ -7,6 +7,9 @@
     </div>
 </div>
 <div class="container" style="text-align: left; padding-top: 20px;">
+    <div class="alert alert-info" role="alert">
+        您正在填寫『<strong>{{shopName}}</strong>』的防疫表單
+    </div>
     <form>
         <div class="mb-3">
             <label for="real-name" class="form-label">請填寫您的真實姓名</label>
@@ -21,7 +24,7 @@
             <input type="range" class="form-range" min="1" max="10" step="1" id="customRange3" v-model.number="personAmount">
             <input type="number" class="form-control" style="width: 100%" v-model.number="personAmount" max="10" min="1" required/>
         </div>
-        <button type="submit" style="width: 100%;" class="btn btn-primary">送出</button>        
+        <button type="button" style="width: 100%;" class="btn btn-primary" @click="checkForm">送出</button>        
         <div id="emailHelp" class="form-text">請麻煩一定要確實填寫正確資訊，感謝您的配合！</div>
     </form>
 </div>

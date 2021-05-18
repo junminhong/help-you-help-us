@@ -7,7 +7,7 @@
         </div>
     </div>
     <div class="container" style="padding-top: 20px; text-align: center;">
-        <VueQrcode style="text-align: center" id="qrcode" scale="10" value="shopQrcode"></VueQrcode>
+        <VueQrcode style="text-align: center" id="qrcode" scale="4" :value="shopUid"></VueQrcode>
         <button type="button" style="width: 100%;" class="btn btn-primary" @click="downloadQrcode">下載</button>        
     </div>
 </div>

@@ -33,7 +33,7 @@
             <input type="tel" class="form-control" id="owner-phone-number-input" v-model="ownerPhoneNumber" placeholder="ex: 0912345678" oninput="value=value.replace(/[^\d]/g,'')" maxlength="10" required/>
             <div style="color: red"><small>{{ownerPhoneNumberErrorMsg}}</small></div>
         </div>
-        <button type="button" id="send_sms" style="width: 100%;" class="btn btn-primary" @click="checkShopInfo">送出</button>
+        <button type="button" id="send-sms" style="width: 100%;" class="btn btn-primary" @click="checkShopInfo">送出</button>
         <div id="help" class="form-text">請麻煩一定要確實填寫正確資訊，感謝您的配合！</div>
     </form>
 </div>

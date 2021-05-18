@@ -16,9 +16,16 @@ export default{
         this.initRecaptchaVerifier()
     },
     methods:{
+        gotoQrcode: function(shopUid){
+            this.$router.push({
+                name: 'ShopQrCode',
+                params:{shopUid: shopUid,}
+            }) 
+        },
         sendCode: function(){
             this.confirmationResult.confirm(this.verificationCode).then(result => {
                 console.log(result);
+                this.gotoQrcode(this.$route.params.shopUid);
             }).catch((error) => {
                 if (error.code === 'auth/invalid-verification-code'){
                     Swal.fire(

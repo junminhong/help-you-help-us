@@ -7,7 +7,8 @@ import VueQrcode from "vue3-qrcode";
 export default {
   data(){
     return{
-      shopQrcode: '',
+      shopUid: '',
+      hostName: 'https://help-you-help-us--help-you-help-us-dqj7d3rt.web.app/customr-form/',
     }
   },
   components: {
@@ -18,7 +19,7 @@ export default {
   },
   methods: {
     showUserWalletStatus: function (){
-      this.shopQrcode = 'test';
+      this.shopUid = this.hostName + this.$route.params.shopUid;
     },
     downloadQrcode: function(){
       var img = document.getElementById('qrcode'); // 获取要下载的图片
