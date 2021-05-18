@@ -24,7 +24,6 @@ export default{
             shopPhoneNumberErrorMsg: '',
             realOwnerNameErrorMsg: '',
             ownerPhoneNumberErrorMsg: '',
-            canAddShopInfo: true,
             confirmationResult: '',
             haveVerificationPhone: false,
         }
@@ -37,38 +36,39 @@ export default{
                         '真實負責人姓名：' + this.realOwnerName + 
                         '負責人手機電話：' + this.ownerPhoneNumber);
             console.log(uid(64));
+            var canAddShopInfo = true;
             if(this.realShopName === ''){
                 this.realShopNameErrorMsg = '商店名稱不得為空！';
-                this.canAddShopInfo = false;
+                canAddShopInfo = false;
             }
             if(this.shopAddress === ''){
                 this.shopAddressErrorMsg = '商店地址不得為空！';
-                this.canAddShopInfo = false;
+                canAddShopInfo = false;
             }
             if(this.shopPhoneNumber === ''){
                 this.shopPhoneNumberErrorMsg = '商店市話/手機不得為空！';
-                this.canAddShopInfo = false;
+                canAddShopInfo = false;
             }
             if(this.realOwnerName === ''){
                 this.realOwnerNameErrorMsg = '負責人姓名不得為空！';
-                this.canAddShopInfo = false;
+                canAddShopInfo = false;
             }
             if(this.ownerPhoneNumber === ''){
                 this.ownerPhoneNumberErrorMsg = '負責人手機不得為空！';
-                this.canAddShopInfo = false;
+                canAddShopInfo = false;
             }
-            if(this.canAddShopInfo){
+            if(canAddShopInfo){
                 this.clearErrorMsg();
                 this.addShopInfo();
             }
-            this.canAddShopInfo = true;
+            
         },
         addShopInfo: function(){
-            var email = this.ownerPhoneNumber + '@help-you-help-us.com.tw';
-            var name = this.realOwnerName + this.realOwnerName;
-            db.auth().signInWithEmailAndPassword(email, name).then(user => {user.user.phoneNumber
+            var email = this.ownerPhoneNumber + this.realOwnerName + '@help-you-help-us.com.tw';
+            var name = this.ownerPhoneNumber + this.realOwnerName;
+            db.auth().signInWithEmailAndPassword(email, name).then(user => {
                 this.createShopInfo(user.user.uid, user.user.phoneNumber);
-                console.log('註冊完成，等待生成qrcode');
+                //console.log('註冊完成，等待生成qrcode');
             }).catch(error => {
                 if (error.code === 'auth/user-not-found'){
                     db.auth().createUserWithEmailAndPassword(email, name).then(user => {
@@ -78,7 +78,7 @@ export default{
             })
         },
         clearErrorMsg: function(){
-            console.log('clear');
+            //console.log('clear');
             this.realShopNameErrorMsg = '';
             this.shopAddressErrorMsg = '';
             this.shopPhoneNumberErrorMsg = '';

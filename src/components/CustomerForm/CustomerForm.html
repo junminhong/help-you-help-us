@@ -13,11 +13,13 @@
     <form>
         <div class="mb-3">
             <label for="real-name" class="form-label">請填寫您的真實姓名</label>
-            <input type="text" class="form-control" id="real-name-input" placeholder="ex: 王小明" maxlength="25" required/>
+            <input type="text" class="form-control" id="real-name-input" v-model="realName" placeholder="ex: 王小明" maxlength="25" required/>
+            <div style="color: red"><small>{{realNameErrorMsg}}</small></div>
         </div>
         <div class="mb-3">
             <label for="phone-number" class="form-label">請填寫您的聯絡電話</label>
-            <input type="tel" class="form-control" id="phone-number-input" placeholder="ex: 0912345678" oninput="value=value.replace(/[^\d]/g,'')" maxlength="10" required/>
+            <input type="tel" class="form-control" id="phone-number-input" v-model="phoneNumber" placeholder="ex: 0912345678" oninput="value=value.replace(/[^\d]/g,'')" maxlength="10" required/>
+            <div style="color: red"><small>{{phoneNumberErrorMsg}}</small></div>
         </div>
         <div class="mb-3">
             <label for="person-amount" class="form-label">請填寫一同進入的人數(包含自己)</label>
