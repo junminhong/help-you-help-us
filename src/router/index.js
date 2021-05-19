@@ -7,12 +7,12 @@ import ShopQrCode from '@/components/ShopQrCode/ShopQrCode'
 
 const routes = [
   {
-    path: '/customr-form',
+    path: '/customer-form',
     name: 'CustomerForm',
     component: CustomerForm
   },
   {
-    path: '/customr-form/:shopUid',
+    path: '/customer-form/:shopUid',
     name: 'CustomerForm',
     component: CustomerForm
   },

@@ -8,7 +8,7 @@ export default {
   data(){
     return{
       shopUid: '',
-      hostName: 'https://help-you-help-us--help-you-help-us-dqj7d3rt.web.app/customr-form/',
+      hostName: 'https://help-you-help-us.web.app/customer-form/',
     }
   },
   components: {

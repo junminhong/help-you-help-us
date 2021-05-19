@@ -26,7 +26,13 @@
             <input type="range" class="form-range" min="1" max="10" step="1" id="customRange3" v-model.number="personAmount">
             <input type="number" class="form-control" style="width: 100%" v-model.number="personAmount" max="10" min="1" required/>
         </div>
-        <button type="button" style="width: 100%;" class="btn btn-primary" @click="checkForm">送出</button>        
+        <button v-if="!isSendData" type="button" style="width: 100%;" class="btn btn-primary" @click="checkForm">
+           送出
+        </button>    
+        <button v-if="isSendData" disabled type="button" style="width: 100%;" class="btn btn-primary">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            資料傳送中
+        </button>        
         <div id="emailHelp" class="form-text">請麻煩一定要確實填寫正確資訊，感謝您的配合！</div>
     </form>
 </div>

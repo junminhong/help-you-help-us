@@ -26,16 +26,18 @@ export default{
             ownerPhoneNumberErrorMsg: '',
             confirmationResult: '',
             haveVerificationPhone: false,
+            isSendData: false
         }
     },
     methods: {
         checkShopInfo: function(){
-            console.log('商店名稱：' + this.realShopName +
+            this.isSendData = true;
+            /*console.log('商店名稱：' + this.realShopName +
                         '商店地址：' + this.shopAddress +
                         '商店電話：' + this.shopPhoneNumber + 
                         '真實負責人姓名：' + this.realOwnerName + 
                         '負責人手機電話：' + this.ownerPhoneNumber);
-            console.log(uid(64));
+            console.log(uid(64));*/
             var canAddShopInfo = true;
             if(this.realShopName === ''){
                 this.realShopNameErrorMsg = '商店名稱不得為空！';
@@ -60,8 +62,9 @@ export default{
             if(canAddShopInfo){
                 this.clearErrorMsg();
                 this.addShopInfo();
+            }else{
+                this.isSendData = false;
             }
-            
         },
         addShopInfo: function(){
             var email = this.ownerPhoneNumber + this.realOwnerName + '@help-you-help-us.com.tw';
@@ -93,12 +96,14 @@ export default{
             this.shopAddress = '';
         },
         gotoPhoneVerification: function(shopUid){
+            this.isSendData = false;
             this.$router.push({
                 name: 'PhoneVerification',
                 params:{phonenumber: this.ownerPhoneNumber, shopUid: shopUid}
             }) 
         },
         gotoQrcode: function(shopUid){
+            this.isSendData = false;
             this.$router.push({
                 name: 'ShopQrCode',
                 params:{shopUid: shopUid,}
@@ -113,7 +118,7 @@ export default{
                 create_time: date,
                 update_time: date,
             }).then(()=>{
-                console.log('新增user');
+                //console.log('新增user');
                 db.firestore().collection('shops').doc(shopUid).set({
                     name: this.realShopName,
                     phone: this.shopPhoneNumber,
@@ -137,17 +142,16 @@ export default{
             })
         },
         aas: function(){
-            console.log('ss');
-            console.log(this.confirmationResult);
-            this.confirmationResult.confirm('123456').then(result => {
+            //console.log(this.confirmationResult);
+            /*this.confirmationResult.confirm('123456').then(result => {
                 console.log(result);
             }).catch((error) => {
                 console.log(error);
-            });
+            });*/
             window.recaptchaVerifier = new db.auth.RecaptchaVerifier('send_sms', {
                 'size': 'invisible',
-                'callback': function(response) {
-                    console.log(response)
+                'callback': function() {
+                    //console.log(response)
                 }
             })
             db.auth().signInWithEmailAndPassword('0912345678@help-you-help-us.com.tw', '0912345678').then(()=>{

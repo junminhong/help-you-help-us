@@ -23,8 +23,8 @@ export default{
             }) 
         },
         sendCode: function(){
-            this.confirmationResult.confirm(this.verificationCode).then(result => {
-                console.log(result);
+            this.confirmationResult.confirm(this.verificationCode).then(() => {
+                //console.log(result);
                 this.gotoQrcode(this.$route.params.shopUid);
             }).catch((error) => {
                 if (error.code === 'auth/invalid-verification-code'){
@@ -55,9 +55,9 @@ export default{
             db.auth().currentUser.linkWithPhoneNumber(taiwan_phone_number, appVerifier)
             .then(confirmationResult => {
                 this.confirmationResult = confirmationResult;
-            }).catch(error=>{
+            }).catch(()=>{
                 //location.reload();
-                console.log(error);
+                //console.log(error);
             })
         }
     }

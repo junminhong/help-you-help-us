@@ -18,7 +18,8 @@ export default {
             phoneNumber: '',
             realNameErrorMsg: '',
             phoneNumberErrorMsg: '',
-            haveVerificationPhone: false
+            haveVerificationPhone: false,
+            isSendData: false
         }
     },
     mounted() {
@@ -38,12 +39,15 @@ export default {
             })
         },
         checkForm: function(){
+            this.isSendData = true;
             if (this.haveSysError){
                 Swal.fire(
                     '系統訊息',
                     '此表單有些問題，麻煩聯絡商家',
                     'error'
-                )
+                ).then(()=>{
+                    this.isSendData = false;
+                })
             }else{
                 var canAddUserInfo = true;
                 if (this.realName === ''){
@@ -63,7 +67,7 @@ export default {
         addUserInfo: function(){
             var email = this.phoneNumber + this.realName + '@help-you-help-us.com.tw';
             var name = this.phoneNumber + this.realName;
-            console.log(name);
+            //console.log(name);
             db.auth().signInWithEmailAndPassword(email, name).then(user => {
                 this.createUserInfo(user.user.uid, user.user.phoneNumber);
                 //console.log('註冊完成，等待生成qrcode');
@@ -83,7 +87,7 @@ export default {
                 }
             })
         },
-        createUserInfo: function(userUid, phoneNumber){
+        createUserInfo: function(userUid){
             let date = dateFormat(db.firestore.Timestamp.seconds, "yyyy-mm-dd HH:mm:ss")
             let recordUid = uid(64);
             db.firestore().collection('users').doc(userUid).set({
@@ -106,11 +110,12 @@ export default {
                         update_time: date,
                     })
                     this.clearFormInput();
+                    this.isSendData = false;
                     this.$router.push({
                         name: 'VerificationSuccess',
                         params:{}  
                     })
-                    console.log(phoneNumber);
+                    //console.log(phoneNumber);
                 })
             })
         },
@@ -118,14 +123,14 @@ export default {
             if (navigator.geolocation){
                 navigator.geolocation.getCurrentPosition(this.showPosition);
             }else{
-                console.log('不支援定位');
+                //console.log('不支援定位');
             }
             Swal.fire(
                 '系統訊息',
                 position.coords.latitude + ', ' + position.coords.longitude,
                 'info'
             )
-            console.log(position.coords.latitude, position.coords.longitude);
+            //console.log(position.coords.latitude, position.coords.longitude);
         },
         clearErrorMsg: function(){
             this.realNameErrorMsg = '';
